@@ -1,0 +1,19 @@
+- hosts: webservers
+  become: yes
+
+  tasks:
+    - name: installing nginx package
+      yum:
+        name: httpd
+        state: present
+
+    - name: started nginx service
+      service:
+        name: httpd
+        state: reloaded
+        enabled: yes
+
+    - name: copying file
+      copy:
+        src: index.html
+        dest: /var/www/html/
